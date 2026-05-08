@@ -1,80 +1,106 @@
-# Capstone (just checking)
+# AI-Driven Course System (Backend Analytics Demo)
 
-Monorepo with Next.js frontend, FastAPI backend, and PostgreSQL (pgvector). Docker Compose runs everything with one command.
+This repository contains a full-stack, team-based AI tutoring platform developed during my undergraduate capstone project at Arizona State University.
 
-## Quick Start
+The system integrates course content from Canvas LMS and leverages retrieval-augmented generation (RAG) along with OpenAI’s ChatGPT Edu integration to provide an interactive AI tutoring experience. Students can engage with a chatbot interface for guided learning, while the platform uses a FastAPI backend, Next.js frontend, and PostgreSQL (pgvector) to support analytics and reporting on student performance.
 
-Prereqs: Docker, Docker Compose
+---
+
+## 🧠 My Contributions
+
+I designed and implemented the backend analytics and reporting subsystem, focusing on transforming raw student performance data into structured, actionable insights for instructors.
+
+Key contributions include:
+
+- Developed RESTful analytics endpoints to compute:
+  - Average scores per module
+  - Course completion rates
+  - Top and bottom performing students
+- Designed and implemented a service-layer architecture to separate API routing from business logic and data aggregation
+- Built CSV and PDF export pipelines for instructor-facing reports using structured data formatting and document generation (ReportLab)
+- Created a seeded data pipeline to simulate realistic student performance data for testing and demonstration
+- Designed database models for students and performance tracking, enabling efficient querying and aggregation
+- Integrated PostgreSQL queries with FastAPI endpoints to support efficient and scalable data retrieval
+
+---
+
+## 📂 Key Files (My Work)
+
+These files represent the core of my contributions:
+
+- `backend/app/api/analytics.py` — FastAPI endpoints for analytics queries and report export (CSV/PDF)
+- `backend/app/api/add_student_scores.py` — Endpoint for seeding and inserting structured student performance data
+- `backend/app/services/analytics_service.py` — Service-layer logic for aggregating scores, computing metrics, and preparing report data
+- `backend/app/models/domain_models.py` — SQLAlchemy data models defining students, scores, and relationships for analytics queries
+
+---
+
+## 🚀 Demo Overview
+
+This demo highlights the backend analytics system via Swagger UI.
+
+### 1. Seed Data
+
+`POST /api/seed-data`
+
+Populates the database with realistic student and module performance data.
+
+---
+
+### 2. Analytics Endpoints
+
+`GET /analytics/averages`  
+Returns average scores per course module
+
+`GET /analytics/completion`  
+Returns completion rates across modules
+
+`GET /analytics/leaders`  
+Returns top and bottom performing students
+
+---
+
+### 3. Report Export
+
+`GET /analytics/export/csv`  
+Generates a structured CSV report of analytics data
+
+`GET /analytics/export/pdf`  
+Generates a formatted PDF report for instructor use
+
+---
+
+## 🏗️ Architecture Overview
+
+The backend follows a layered architecture:
+
+- **API Layer (`api/`)** — FastAPI route definitions and request/response handling
+- **Service Layer (`services/`)** — Business logic and data aggregation
+- **Data Layer (`models/` + PostgreSQL)** — ORM models and persistent storage
+
+This separation improves maintainability, scalability, and clarity of responsibilities across the system.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend:** FastAPI, Python
+- **Frontend:** Next.js, React, Tailwind
+- **Database:** PostgreSQL + pgvector
+- **ORM:** SQLAlchemy
+- **DevOps:** Docker, Docker Compose
+- **AI Integration:** OpenAI ChatGPT Edu, RAG-based retrieval system
+
+---
+
+## ⚙️ Running the Project
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Run the full stack
 
 ```bash
 docker compose up --build
-```
-
-Open `http://localhost:3000` for the frontend.
-Backend health: `http://localhost:8000/health`
-DB runs on `localhost:5432` (user: `app`, password: `app_password`, db: `app`).
-
-## Structure
-
-- `frontend/`: Next.js 14 + Tailwind
-- `backend/`: FastAPI + psycopg
-- `db/`: init scripts (pgvector)
-
-## Acceptance Criteria
-
-- Single command to run stack: `docker compose up`
-- Frontend and backend communicate (frontend calls `backend:8000` via env)
-- Database connection succeeds (`/db-check` returns ok)
-
-## Test Scenarios
-
-New developer onboarding
-1. Clone repo
-2. Run `docker compose up --build`
-3. Visit `http://localhost:3000` and `http://localhost:8000/health`
-
-Expected: all services start without errors; Next.js page loads; `/health` returns ok.
-
-## Branching Strategy (GitFlow-lite)
-
-- `main`: stable releases
-- `develop`: integration branch
-- Feature branches: `feature/<name>` → PR into `develop`
-- Release branches: `release/<version>` → merge to `main` and `develop`
-- Hotfix branches: `hotfix/<name>` → PR into `main` and `develop`
-
-## Local Development (without Docker)
-
-Frontend:
-```bash
-cd frontend && npm install && npm run dev
-```
-
-Backend:
-```bash
-export OPENAI_API_KEY="sk-your-key"
-or set your in the .env file with
-OPENAI_API_KEY="sk-your-key"
-# Optional: export OPENAI_MODEL="gpt-4o-mini"
-cd backend && pip install -r requirements.txt && uvicorn app.main:app --reload
-```
-
-## Tutor API
-
-- Endpoint: `POST /tutor`
-- Request body:
-  ```json
-  {
-    "question": "How do I set up a stack frame in assembly?",
-    "context": "Previous learning notes (optional)"
-  }
-  ```
-- Response body:
-  ```json
-  {
-    "answer": "Tutor response generated by OpenAI"
-  }
-  ```
-
-The backend returns `500` if `OPENAI_API_KEY` is missing or invalid. The frontend chat experience proxies user questions to this endpoint.
-
