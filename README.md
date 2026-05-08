@@ -39,6 +39,17 @@ These files represent the core of my contributions:
 
 This demo highlights the backend analytics system via Swagger UI.
 
+---
+
+###  Sample Outputs
+
+The following sample outputs were generated from seeded demo data:
+
+- CSV report: `demo/outputs/sample_analytics_report.csv`
+- PDF report: `demo/outputs/sample_analytics_report.pdf`
+
+Note: Output values vary between runs due to randomized seed data.
+
 ### 1. Seed Data
 
 `POST /api/seed-data`

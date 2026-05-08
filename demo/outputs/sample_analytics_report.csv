@@ -1,0 +1,29 @@
+=== Average Scores ===,
+Module,Average Score
+Arithmetic & Logic,80.3
+Data Transfer,80.45
+Intro to Assembly,80.3
+Stack & Memory,81.85
+Branch Instructions,83.8
+Loops & Conditions,77.5
+,
+=== Completion Rates ===,
+Module,Completion Rate (%)
+Data Transfer,70
+Arithmetic & Logic,70
+Intro to Assembly,70
+Stack & Memory,70
+Branch Instructions,80
+Loops & Conditions,70
+,
+"=== Top Students (First, Last) ===",
+Student,Average Score
+Quinn Hall,89
+Olivia Lewis,88.33
+Charlie Brown,88
+,
+"=== Bottom Students (First, Last) ===",
+Student,Average Score
+Liam White,74.83
+Grace Taylor,74.83
+Parker Young,69.5
