@@ -39,9 +39,7 @@ These files represent the core of my contributions:
 
 This demo highlights the backend analytics system via Swagger UI.
 
----
-
-###  Sample Outputs
+### Sample Outputs
 
 The following sample outputs were generated from seeded demo data:
 
@@ -49,6 +47,14 @@ The following sample outputs were generated from seeded demo data:
 - PDF report: `demo/outputs/sample_analytics_report.pdf`
 
 Note: Output values vary between runs due to randomized seed data.
+
+### Demo Walkthrough
+
+Video walkthrough of the backend analytics system:
+
+[Watch Demo](https://drive.google.com/drive/folders/1M7qUKQ50uxyRd00YrBL0za2Mq206lgAH?usp=sharing)
+
+---
 
 ### 1. Seed Data
 
